@@ -1,0 +1,67 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h2>Editable Table</h2>
+<form method="POST" action="{{ url_for('save') }}" id="csvForm">
+  <table id="csvTable">
+    <thead>
+      <tr>
+        {% for h in headers %}
+          <th><input name="headers" value="{{ h }}"></th>
+        {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in rows %}
+        <tr>
+          {% for cell in row %}
+            <td><input name="cell" value="{{ cell }}"></td>
+          {% endfor %}
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <input type="hidden" name="rows" id="rowCount" value="{{ rows|length }}">
+  <input type="hidden" name="cols" id="colCount" value="{{ headers|length }}">
+  <button type="button" onclick="addRow()">➕ Add Row</button>
+  <button type="button" onclick="addColumn()">➕ Add Column</button>
+  <button type="submit">💾 Save</button>
+</form>
+
+<script>
+function addRow() {
+  const table = document.getElementById('csvTable').getElementsByTagName('tbody')[0];
+  const cols = parseInt(document.getElementById('colCount').value);
+  const row = document.createElement('tr');
+  for (let i = 0; i < cols; i++) {
+    const td = document.createElement('td');
+    const input = document.createElement('input');
+    input.name = 'cell';
+    td.appendChild(input);
+    row.appendChild(td);
+  }
+  table.appendChild(row);
+  document.getElementById('rowCount').value = table.rows.length;
+}
+
+function addColumn() {
+  const headerRow = document.getElementById('csvTable').tHead.rows[0];
+  const th = document.createElement('th');
+  const input = document.createElement('input');
+  input.name = 'headers';
+  th.appendChild(input);
+  headerRow.appendChild(th);
+
+  const tbody = document.getElementById('csvTable').tBodies[0];
+  for (let row of tbody.rows) {
+    const td = document.createElement('td');
+    const input = document.createElement('input');
+    input.name = 'cell';
+    td.appendChild(input);
+    row.appendChild(td);
+  }
+
+  const cols = document.getElementById('colCount');
+  cols.value = parseInt(cols.value) + 1;
+}
+</script>
+{% endblock %}

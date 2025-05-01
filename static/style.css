@@ -1,0 +1,51 @@
+body {
+    margin: 0;
+    font-family: Arial;
+  }
+  
+  .sidebar {
+    position: fixed;
+    width: 200px;
+    height: 100vh;
+    background: #333;
+    color: white;
+    padding: 15px;
+  }
+  
+  .sidebar h2 {
+    font-size: 20px;
+    margin-top: 0;
+  }
+  
+  .sidebar a {
+    display: block;
+    margin: 10px 0;
+    color: white;
+    text-decoration: none;
+  }
+  
+  .sidebar a:hover {
+    text-decoration: underline;
+  }
+  
+  .content {
+    margin-left: 220px;
+    padding: 20px;
+  }
+  
+  table, th, td {
+    border: 1px solid #aaa;
+    border-collapse: collapse;
+    padding: 5px;
+  }
+  
+  input {
+    width: 100%;
+    border: none;
+  }
+  
+  button {
+    margin: 5px;
+    padding: 5px 10px;
+  }
+  
