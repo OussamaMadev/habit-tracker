@@ -175,4 +175,7 @@ cython_debug/
 
 
 # bat scrypts
-.bat
+*.bat
+
+# data
+*.csv
